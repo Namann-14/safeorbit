@@ -45,20 +45,20 @@ scikit-image>=0.21.0           # Image processing algorithms
 # Optimization and Hyperparameter Tuning
 # ================================================================================
 optuna>=3.3.0                  # Hyperparameter optimization framework
-ray[tune]>=2.7.0               # Distributed hyperparameter tuning (optional)
+# ray[tune]>=2.7.0             # Distributed hyperparameter tuning (optional) - DISABLED: Complex dependencies
 
 # Model Optimization and Export
 # ================================================================================
-openvino-dev>=2023.0.0         # Intel OpenVINO toolkit (optional)
-tensorrt>=8.6.0                # NVIDIA TensorRT (optional, requires CUDA)
-coremltools>=6.3.0             # CoreML export for iOS (optional)
-tensorflow>=2.13.0             # TensorFlow/TFLite export (optional)
+# openvino-dev>=2023.0.0       # Intel OpenVINO toolkit (optional) - DISABLED: Platform-specific
+# tensorrt>=8.6.0              # NVIDIA TensorRT (optional, requires CUDA) - DISABLED: Requires CUDA
+# coremltools>=6.3.0           # CoreML export for iOS (optional) - DISABLED: macOS only
+# tensorflow>=2.13.0           # TensorFlow/TFLite export (optional) - DISABLED: Large dependency
 
 # Experiment Tracking (Optional)
 # ================================================================================
-wandb>=0.15.0                  # Weights & Biases (optional)
+# wandb>=0.15.0                # Weights & Biases (optional) - DISABLED: Optional dependency
 mlflow>=2.5.0                  # MLflow tracking (optional)
-comet-ml>=3.33.0               # Comet.ml tracking (optional)
+# comet-ml>=3.33.0             # Comet.ml tracking (optional) - DISABLED: Optional dependency
 
 # Testing and Quality Assurance
 # ================================================================================

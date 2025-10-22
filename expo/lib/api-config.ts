@@ -14,7 +14,7 @@
 // For development, update this with your local IP address
 export const API_CONFIG = {
   // Replace with your computer's IP address when testing on physical device
-  BACKEND_URL: 'http://192.168.152.122:8000',
+  BACKEND_URL: 'http://192.168.1.6:8000',
   
   // Use localhost when testing on emulator/simulator on same machine
   // BACKEND_URL: 'http://localhost:8000',
