@@ -160,3 +160,7 @@ venv/
 results/runs/train/weights/*.pt       # Block intermediate epoch weights
 !results/runs/train/weights/best.pt   # ✅ Allow best model
 !results/runs/train/weights/last.pt   # ✅ Allow last checkpoint
+
+# ✅ Best model folder - Always include
+!results/best-model/
+!results/best-model/*
