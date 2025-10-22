@@ -1,92 +1,28 @@
-# ================================================================================
-# Space Station Safety Object Detection System
-# ================================================================================
-# Production-Grade YOLOv8m Model for Critical Safety Equipment Detection
-# ✨ NOW WITH DOMAIN ADAPTATION FOR REAL-WORLD IMAGES ✨
-# ================================================================================
-
-<div align="center">
-
-# 🛰️ Space Station Safety Object Detection
+# Space Station Safety Object Detection
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
 [![YOLOv8](https://img.shields.io/badge/YOLOv8-m-green.svg)](https://github.com/ultralytics/ultralytics)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**Production-ready object detection system for identifying critical safety equipment in space station environments**
+YOLOv8m-based object detection system for identifying 7 critical safety equipment classes in space station environments. Achieves **86.4% mAP@0.5** on synthetic validation data (epoch 204).
 
-**🚀 NEW: Domain Adaptation for Real-World Images!**
+## Performance
 
-[Features](#features) • [Domain Adaptation](#domain-adaptation-new) • [Installation](#installation) • [Training](#training) • [Documentation](#documentation)
+| Metric | Value (Epoch 204) |
+|--------|-------------------|
+| mAP@0.5 | 86.36% |
+| mAP@0.5:0.95 | 75.33% |
+| Precision | 95.52% |
+| Recall | 74.31% |
 
-</div>
+*Note: Training stopped at epoch 204 due to CUDA OOM error. Results are from validation set.*
 
----
+## Classes
 
-## 🎉 NEW: Domain Adaptation for Real-World Images
+7 critical safety equipment types:
 
-### Problem Solved
-Your model trained on **synthetic Falcon dataset** now works on **real-world images**!
-
-**Before:**
-- ✅ Synthetic test: 85.8% mAP@50
-- ❌ Real images: Poor performance (domain gap)
-
-**After Domain Adaptation:**
-- ✅ Synthetic test: 90-92% mAP@50
-- ✅ **Real images: 88-94% mAP@50** 🎯
-
-### Quick Start (V100 Training)
-```bash
-# Setup & validate
-python setup_domain_adaptation.py
-
-# Start training on V100 (12-16 hours)
-train_on_v100.bat  # Windows
-./train_on_v100.sh # Linux
-
-# Test on real images with TTA
-python scripts/inference_tta.py --model models/best.pt --source path/to/real/images
-```
-
-### 📚 Documentation
-- **[V100_TRAINING_GUIDE.md](V100_TRAINING_GUIDE.md)** - Start here for V100 training
-- **[DOMAIN_ADAPTATION_GUIDE.md](DOMAIN_ADAPTATION_GUIDE.md)** - Technical details
-- **[TRAINING_COMPLETE.md](TRAINING_COMPLETE.md)** - Complete summary
-
-### What's New
-- ✨ **Domain adaptation augmentations** (noise, blur, compression)
-- ✨ **Test-Time Augmentation (TTA)** for 2-5% accuracy boost
-- ✨ **Enhanced training config** for better generalization
-- ✨ **API with TTA support** for real-world inference
-- ✨ **V100 optimized** (batch size 32, 12-16 hour training)
-
----
-
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [Training](#training)
-- [Evaluation](#evaluation)
-- [Deployment](#deployment)
-- [Results](#results)
-- [Documentation](#documentation)
-- [Contributing](#contributing)
-- [License](#license)
-
----
-
-## 🎯 Overview
-
-This system provides **state-of-the-art object detection** for identifying 7 critical safety objects in space station environments:
-
-| Class ID | Object Name | Description |
-|----------|-------------|-------------|
+| ID | Class | Description |
+|----|-------|-------------|
 | 0 | OxygenTank | Emergency oxygen supply |
 | 1 | NitrogenTank | Nitrogen storage tank |
 | 2 | FirstAidBox | Medical emergency kit |
@@ -95,354 +31,172 @@ This system provides **state-of-the-art object detection** for identifying 7 cri
 | 5 | EmergencyPhone | Emergency communication |
 | 6 | FireExtinguisher | Fire suppression equipment |
 
-### 🎓 Model Performance
-
-| Metric | Target | Achieved |
-|--------|--------|----------|
-| **mAP@0.5** | ≥80% | ✅ To be determined after training |
-| **mAP@0.5:0.95** | ≥60% | ✅ To be determined after training |
-| **Precision** | ≥85% | ✅ To be determined after training |
-| **Recall** | ≥80% | ✅ To be determined after training |
-
-### 🌟 Challenging Scenarios
-
-The model is optimized for robust performance across:
-- ✅ **Lighting Variations**: Very light, light, dark, very dark conditions
-- ✅ **Occlusion Handling**: Cluttered and uncluttered scenes
-- ✅ **Multiple Environments**: Hallways, rooms, various space station locations
-- ✅ **Real-time Performance**: >30 FPS inference capability
-
----
-
-## 🚀 Key Features
-
-### Model Architecture
-- **YOLOv8m** (Medium) - Optimal balance of speed and accuracy
-- Transfer learning from COCO pre-trained weights
-- Optimized for space station safety equipment detection
-
-### Training Pipeline
-- 🔥 **Advanced Data Augmentation** - Lighting, occlusion, and spatial augmentations
-- 📊 **Comprehensive Metrics** - mAP, precision, recall, per-class analysis
-- 💾 **Smart Checkpointing** - Save best models automatically
-- ⏱️ **Early Stopping** - Prevent overfitting
-- 📈 **TensorBoard Integration** - Real-time training visualization
-- 🔧 **Multi-GPU Support** - Distributed training ready
-
-### Evaluation & Analysis
-- Scenario-specific performance breakdown (lighting × occlusion)
-- Confusion matrix analysis
-- Per-class metrics
-- Error analysis and visualization
-
-### Deployment Ready
-- ONNX export for cross-platform deployment
-- TensorRT optimization for NVIDIA GPUs
-- TFLite quantization for mobile/edge devices
-- Production-grade inference pipeline
-
 ---
 
 ## 📁 Project Structure
 
 ```
-yolov8m/
-├── 📁 configs/                          # Configuration files
-│   ├── dataset.yaml                     # Dataset configuration
+ai-engine/                               # Submission-ready structure
+├── 📄 train.py                          # Main training script ⭐
+├── 📄 predict.py                        # Inference script ⭐
+├── 📄 api.py                            # FastAPI deployment server
+├── � requirements.txt                  # Python dependencies
+├── 📄 README.md                         # This file (complete documentation)
+├── 📄 SUBMISSION_README.md             # Submission guide
+├── 📄 create_submission_package.py     # Package creator script
+│
+├── 📁 configs/                          # YOLO Configuration files
+│   ├── dataset.yaml                     # Dataset config (7 classes)
 │   ├── train_config.yaml               # Training hyperparameters
-│   └── augmentation_config.yaml        # Augmentation settings
+│   └── augmentation_config.yaml        # Data augmentation settings
 │
-├── 📁 datasets/                         # Dataset (your existing data)
-│   ├── train/                          # Training split
-│   │   ├── images/                     # Training images
-│   │   └── labels/                     # YOLO format labels
-│   ├── val/                            # Validation split
-│   └── test/                           # Test split
-│
-├── 📁 scripts/                          # Training & evaluation scripts
-│   ├── train.py                        # Main training script ⭐
-│   ├── evaluate.py                     # Comprehensive evaluation
-│   ├── scenario_analysis.py           # Lighting/occlusion analysis
-│   ├── predict.py                      # Inference script
-│   ├── export_model.py                 # Model export utilities
-│   ├── optimize_model.py               # Model optimization
-│   ├── benchmark.py                    # Performance benchmarking
-│   ├── data_analysis.py                # Dataset statistics
-│   └── visualize_predictions.py        # Prediction visualization
+├── 📁 scripts/                          # Additional training scripts
+│   ├── train.py                        # Production training pipeline
+│   ├── inference_tta.py                # Test-Time Augmentation inference
+│   ├── domain_adaptation.py            # Domain adaptation utilities
+│   ├── model_ensemble.py               # Model ensemble methods
+│   ├── model_optimizer.py              # Model optimization
+│   ├── advanced_augmentation.py        # Advanced augmentations
+│   ├── incremental_learning.py         # Incremental learning
+│   └── master_pipeline.py              # Complete automation
 │
 ├── 📁 utils/                            # Utility modules
-│   ├── logger.py                       # Structured logging
-│   ├── metrics.py                      # Metrics calculation
-│   ├── visualization.py                # Plotting utilities
-│   └── callbacks.py                    # Training callbacks
+│   ├── __init__.py
+│   ├── callbacks.py                    # Training callbacks
+│   ├── logger.py                       # Logging utilities
+│   ├── metrics.py                      # Evaluation metrics
+│   └── visualization.py                # Visualization tools
 │
-├── 📁 models/                           # Trained model weights
-│   ├── best.pt                         # Best model checkpoint
-│   ├── last.pt                         # Last epoch checkpoint
-│   └── best.onnx                       # ONNX export
+├── 📁 runs/                             # Training outputs ⭐
+│   └── train/                          # Latest training run
+│       ├── weights/
+│       │   ├── best.pt                 # Best model checkpoint
+│       │   └── last.pt                 # Last epoch checkpoint
+│       ├── results.csv                 # Training metrics per epoch
+│       ├── args.yaml                   # Training arguments used
+│       ├── confusion_matrix.png        # Confusion matrix
+│       ├── results.png                 # Training curves
+│       ├── PR_curve.png                # Precision-Recall curve
+│       ├── F1_curve.png                # F1 score curve
+│       └── *.jpg                       # Training visualizations
 │
-├── 📁 results/                          # Training results
-│   ├── runs/                           # TensorBoard logs
-│   ├── plots/                          # Visualization plots
-│   └── metrics/                        # Saved metrics
+├── 📁 results/                          # Training results ⭐
+│   └── improved_model/                 # Best model (90%+ mAP)
+│       └── train/
+│           ├── weights/
+│           │   └── best.pt             # RECOMMENDED MODEL ⭐
+│           ├── results.csv
+│           ├── args.yaml
+│           └── *.png                   # Performance visualizations
 │
-├── 📁 notebooks/                        # Jupyter notebooks
-│   ├── 01_data_exploration.ipynb       # EDA
-│   ├── 02_training_analysis.ipynb     # Training analysis
-│   └── 03_results_visualization.ipynb # Results visualization
-│
-├── 📄 requirements.txt                  # Python dependencies
-├── 📄 README.md                         # This file
-├── 📄 TRAINING_GUIDE.md                # Detailed training guide
-└── 📄 DEPLOYMENT_GUIDE.md              # Deployment instructions
+└── � logs/                             # Training logs
+    └── training_*.log                  # Detailed training logs
 ```
 
 ---
 
-## ⚙️ Installation
+## Installation
 
-### Prerequisites
-- Python 3.8 or higher
-- CUDA 11.8+ (for GPU training)
-- 8GB+ RAM (16GB+ recommended)
-- GPU with 8GB+ VRAM (for training)
-
-### Step 1: Clone Repository
-
-```bash
-cd d:\yolov8m
-# Repository files already present
-```
-
-### Step 2: Create Virtual Environment
+**Requirements:**
+- Python 3.8+
+- CUDA 11.8+ (GPU training)
+- 16GB RAM recommended
+- 8GB+ VRAM for training
 
 ```powershell
-# Windows PowerShell
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-
-# Or using conda
-conda create -n yolov8m python=3.9
-conda activate yolov8m
-```
-
-### Step 3: Install Dependencies
-
-```powershell
-# For GPU (CUDA 11.8)
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
-
-# Install remaining requirements
+# Install dependencies
 pip install -r requirements.txt
-```
 
-### Step 4: Verify Installation
-
-```powershell
-python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA Available: {torch.cuda.is_available()}')"
-python -c "from ultralytics import YOLO; print('YOLOv8 ready!')"
+# Verify installation
+python -c "from ultralytics import YOLO; import torch; print(f'CUDA: {torch.cuda.is_available()}')"
 ```
 
 ---
 
-## 🏃 Quick Start
+## Quick Start
 
-### 1️⃣ Train the Model
-
-```powershell
-# Basic training (uses default config)
-python scripts/train.py
-
-# Custom training settings
-python scripts/train.py --epochs 300 --batch 16 --device 0
-
-# Resume from checkpoint
-python scripts/train.py --resume models/last.pt
-```
-
-### 2️⃣ Evaluate Performance
-
-```powershell
-# Evaluate on test set
-python scripts/evaluate.py --model models/best.pt --data configs/dataset.yaml
-
-# Scenario-specific analysis
-python scripts/scenario_analysis.py --model models/best.pt
-```
-
-### 3️⃣ Run Inference
+### Inference (Testing)
 
 ```powershell
 # Single image
-python scripts/predict.py --model models/best.pt --source test_image.png
+python predict.py --source test.jpg --model results/improved_model/train/weights/best.pt
 
-# Batch prediction
-python scripts/predict.py --model models/best.pt --source datasets/test/images/
+# Batch inference
+python predict.py --source test_images/ --model results/improved_model/train/weights/best.pt
 
-# Save results
-python scripts/predict.py --model models/best.pt --source test_images/ --save
+# With Test-Time Augmentation (better accuracy on real images)
+python predict.py --source test_images/ --model results/improved_model/train/weights/best.pt --tta
+
+# Custom confidence threshold
+python predict.py --source test.jpg --model results/improved_model/train/weights/best.pt --conf 0.3
 ```
 
-### 4️⃣ Export Model
+### Training
 
 ```powershell
-# Export to ONNX
-python scripts/export_model.py --model models/best.pt --format onnx
+# Basic training
+python train.py
 
-# Export to TensorRT
-python scripts/export_model.py --model models/best.pt --format engine
+# Custom parameters
+python train.py --epochs 300 --batch 16 --device 0
 
-# Export to TFLite
-python scripts/export_model.py --model models/best.pt --format tflite
+# Resume from checkpoint
+python train.py --resume runs/train/weights/last.pt
+```
+
+### API Deployment
+
+```powershell
+# Start FastAPI server
+uvicorn api:app --host 0.0.0.0 --port 8000
+
+# API docs: http://localhost:8000/docs
 ```
 
 ---
 
-## 🎓 Training
+## Configuration
 
-### Configuration
+Training controlled via YAML files in `configs/`:
 
-Training is controlled via YAML configuration files in `configs/`:
+| File | Purpose |
+|------|---------|
+| `dataset.yaml` | Dataset paths and class definitions |
+| `train_config.yaml` | Training hyperparameters (epochs: 350, batch: 32, lr: 0.0002) |
+| `augmentation_config.yaml` | Domain adaptation augmentations |
 
-- **`dataset.yaml`** - Dataset paths and class definitions
-- **`train_config.yaml`** - Training hyperparameters
-- **`augmentation_config.yaml`** - Data augmentation settings
-
-### Key Training Parameters
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `epochs` | 300 | Number of training epochs |
-| `batch_size` | 16 | Batch size (adjust for GPU memory) |
-| `learning_rate` | 0.001 | Initial learning rate |
-| `image_size` | 640 | Input image size |
-| `patience` | 50 | Early stopping patience |
-
-### Training Command Options
-
-```powershell
-python scripts/train.py \
-    --config configs/train_config.yaml \      # Training configuration
-    --data configs/dataset.yaml \             # Dataset configuration
-    --epochs 300 \                            # Override epochs
-    --batch 16 \                              # Override batch size
-    --device 0 \                              # GPU device ID
-    --workers 8 \                             # Data loading workers
-    --resume models/last.pt                   # Resume from checkpoint
-```
-
-### Monitoring Training
-
-Training progress can be monitored using:
-
-1. **Console Output** - Real-time metrics in terminal
-2. **TensorBoard** - Visual training curves
-   ```powershell
-   tensorboard --logdir results/runs
-   ```
-3. **Log Files** - Detailed logs in `logs/` directory
+**Key Features:**
+- Domain adaptation for synthetic-to-real transfer
+- Advanced augmentations (mosaic, mixup, noise, blur)
+- Early stopping (patience: 60)
+- AdamW optimizer with cosine LR scheduling
 
 ---
 
-## 📊 Evaluation
+## Training Results
 
-### Comprehensive Metrics
+**Model:** `results/improved_model/train/weights/best.pt` (recommended)
 
-The evaluation system provides:
+**Training logs:**
+- Metrics: `results/improved_model/train/results.csv`
+- Visualizations: `results/improved_model/train/*.png`
+- Config: `results/improved_model/train/args.yaml`
 
-- Overall performance (mAP@0.5, mAP@0.5:0.95)
-- Per-class metrics (AP, precision, recall)
+**Includes:**
 - Confusion matrix
-- Scenario-specific analysis (lighting × occlusion)
+- PR curves
+- F1 curves
+- Training/validation batch samples
 
-### Evaluation Commands
+## Submission Package
 
-```powershell
-# Standard evaluation
-python scripts/evaluate.py --model models/best.pt
+**Ready for submission - all required files included:**
 
-# With visualization
-python scripts/evaluate.py --model models/best.pt --save-plots
-
-# Scenario breakdown
-python scripts/scenario_analysis.py --model models/best.pt --detailed
-```
-
----
-
-## 🚀 Deployment
-
-### Export Options
-
-| Format | Use Case | Command |
-|--------|----------|---------|
-| ONNX | Cross-platform | `--format onnx` |
-| TensorRT | NVIDIA GPUs | `--format engine` |
-| TFLite | Mobile/Edge | `--format tflite` |
-| CoreML | iOS/macOS | `--format coreml` |
-
-### Inference Performance
-
-| Device | FPS | Latency |
-|--------|-----|---------|
-| RTX 3090 | ~120 FPS | ~8ms |
-| RTX 3060 | ~80 FPS | ~12ms |
-| Intel i7 CPU | ~15 FPS | ~66ms |
+1. **Training scripts**: `train.py`, `scripts/train.py`
+2. **Inference script**: `predict.py`
+3. **Configuration files**: `configs/*.yaml`
+4. **Trained model**: `results/improved_model/train/weights/best.pt`
+5. **Training outputs**: `runs/` directory with logs, metrics, visualizations
+6. **Documentation**: This README
 
 ---
-
-## 📈 Results
-
-Results will be available after training completion:
-
-- Training curves: `results/plots/`
-- Confusion matrices: `results/confusion_matrices/`
-- Sample predictions: `results/predictions/`
-- Performance report: `results/performance_report.pdf`
-
----
-
-## 📚 Documentation
-
-- **[TRAINING_GUIDE.md](TRAINING_GUIDE.md)** - Complete training tutorial
-- **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** - Deployment instructions
-- **Notebooks** - Interactive tutorials in `notebooks/`
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please see our contributing guidelines.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- YOLOv8 by [Ultralytics](https://github.com/ultralytics/ultralytics)
-- PyTorch by [Facebook AI Research](https://pytorch.org/)
-- Space station safety dataset contributors
-
----
-
-## 📞 Contact
-
-For questions or support:
-- 📧 Email: support@example.com
-- 💬 Issues: [GitHub Issues](https://github.com/your-repo/issues)
-- 📖 Documentation: [Full Docs](https://docs.example.com)
-
----
-
-<div align="center">
-
-**Built with ❤️ for Space Station Safety**
-
-[⬆ Back to Top](#-space-station-safety-object-detection)
-
-</div>
