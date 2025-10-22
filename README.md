@@ -66,7 +66,7 @@ The system identifies 7 critical safety equipment classes:
 ## ✨ Features
 
 ### 🤖 AI-Powered Detection
-- **High Accuracy**: 86.36% mAP@0.5, 95.52% precision
+- **High Accuracy**: 86.7% mAP@0.5, 95.52% precision
 - **Real-time Processing**: Fast inference with ONNX optimization
 - **Multi-platform**: CPU and GPU support with automatic fallback
 - **Domain Adaptation**: Optimized for real-world space station imagery
@@ -360,8 +360,8 @@ Visit `http://localhost:8000/docs` for Swagger UI with interactive API testing.
 
 | Metric | Value |
 |--------|-------|
-| **mAP@0.5** | **86.36%** |
-| **mAP@0.5:0.95** | **75.33%** |
+| **mAP@0.5** | **86.7%** |
+| **mAP@0.5:0.95** | **76.3%** |
 | **Precision** | **95.52%** |
 | **Recall** | **74.31%** |
 

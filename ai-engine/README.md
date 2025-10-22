@@ -10,10 +10,12 @@ YOLOv8m-based object detection system for identifying 7 critical safety equipmen
 
 | Metric | Value (Epoch 204) |
 |--------|-------------------|
-| mAP@0.5 | 86.36% |
-| mAP@0.5:0.95 | 75.33% |
+| mAP@0.5 | 86.7% |
+| mAP@0.5:0.95 | 76.3% |
 | Precision | 95.52% |
 | Recall | 74.31% |
+
+![alt text](best.png)
 
 *Note: Training stopped at epoch 204 due to CUDA OOM error. Results are from validation set.*
 
