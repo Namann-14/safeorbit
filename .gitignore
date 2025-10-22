@@ -1,0 +1,14 @@
+# Large archive files
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
